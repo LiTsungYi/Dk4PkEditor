@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dk4PkEditor", "Dk4PkEditor.vcxproj", "{74D3140D-C7AD-47DE-8B78-2F8DD595283E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FBB2314A-09C7-45D7-BAB0-6A2651A39702} = {FBB2314A-09C7-45D7-BAB0-6A2651A39702}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kafka", "..\Kafka\Kafka.vcxproj", "{FBB2314A-09C7-45D7-BAB0-6A2651A39702}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74D3140D-C7AD-47DE-8B78-2F8DD595283E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{74D3140D-C7AD-47DE-8B78-2F8DD595283E}.Debug|Win32.Build.0 = Debug|Win32
+		{74D3140D-C7AD-47DE-8B78-2F8DD595283E}.Release|Win32.ActiveCfg = Release|Win32
+		{74D3140D-C7AD-47DE-8B78-2F8DD595283E}.Release|Win32.Build.0 = Release|Win32
+		{FBB2314A-09C7-45D7-BAB0-6A2651A39702}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FBB2314A-09C7-45D7-BAB0-6A2651A39702}.Debug|Win32.Build.0 = Debug|Win32
+		{FBB2314A-09C7-45D7-BAB0-6A2651A39702}.Release|Win32.ActiveCfg = Release|Win32
+		{FBB2314A-09C7-45D7-BAB0-6A2651A39702}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
