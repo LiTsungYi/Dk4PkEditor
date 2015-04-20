@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+
+# Visual C++
+*.suo
+*.sdf
+*.vcxproj.user
+/Debug
+/Release
+/ipch
