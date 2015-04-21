@@ -1,10 +1,11 @@
 #pragma once
 
+#include <Kafka\Stream\ISerializable.h>
+
 namespace Kafka
 {
-
-    class FileWriter;
-
+    struct IOutputStream;
+    struct IInputStream;
 } // namespace Kafka
 
 namespace Dk4
@@ -39,48 +40,24 @@ namespace Dk4
         EQUIP_MAX       // Á`¼Æ
     };
 
-
-    enum SailorDataOffset
-    {
-        SD_OFFSET_TEAM = 0,
-        SD_OFFSET_BASE = 2,
-        SD_OFFSET_EXP = 8,
-        SD_OFFSET_HP = 16,
-        SD_OFFSET_HEALTH = 18,
-        SD_OFFSET_MOOD = 19,
-        SD_OFFSET_EQUIP = 20
-    };
-
-    enum SailorDataLength
-    {
-        SD_LENGTH_TEAM = 1,
-        SD_LENGTH_BASE = 1,
-        SD_LENGTH_EXP = 4,
-        SD_LENGTH_HP = 2,
-        SD_LENGTH_HEALTH = 1,
-        SD_LENGTH_MOOD = 1,
-        SD_LENGTH_EQUIP = 1,
-    };
-
-    class SailorData
+    class SailorData : public Kafka::ISerializable
     {
     public:
         SailorData();
         ~SailorData();
 
-        void Init( int sailorId, Kafka::FileWriter* fileWriter, size_t offset );
+        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
 
-        size_t          m_SailorId;
-        Kafka::FileWriter*     m_FileWriter;
-        size_t          m_Offset;
+        size_t m_SailorId;
 
-        size_t          m_Team;
-        char            m_Base[ BASE_MAX ];
-        int             m_Exp[ EXP_MAX ];
-        short           m_HP;
-        char            m_Health;
-        char            m_Mood;
-        char            m_Equipment[ EQUIP_MAX ];
+        char m_Team;
+        char m_Base[ BASE_MAX ];
+        int m_Exp[ EXP_MAX ];
+        short m_HP;
+        char m_Health;
+        char m_Mood;
+        char m_Equipment[ EQUIP_MAX ];
     };
 
 } // namespace Dk4

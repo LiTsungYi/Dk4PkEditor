@@ -9,28 +9,14 @@
 #include <iostream>
 #include <locale>
 #include <string>
-#include <Kafka\Stream\FileWriter.h>
 #include "TinyFileDialogs\tinyfiledialogs.h"
 #include "Application.h"
-#include "DK4_Common.h"
-#include "Data\Sailor.h"
-#include "Data\City.h"
-
-namespace Dk4
-{
-    using std::cin;
-    using std::cout;
-    using std::endl;
-
-} // namespace Dk4
-
-using namespace Dk4;
 
 int main( int argc, char* argv[] )
 {
     Dk4::Console console;
     return console.Run();
-
+    
     /*
     int myTeamId = 0;
     char input = 0;

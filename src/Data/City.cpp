@@ -1,6 +1,7 @@
 #include "Pch.h"
 
-#include <Kafka\Stream\FileWriter.h>
+#include <Kafka\Stream\IInputStream.h>
+#include <Kafka\Stream\IOutputStream.h>
 #include "Data\City.h"
 
 namespace Dk4
@@ -8,86 +9,86 @@ namespace Dk4
     //////////////////////////////////////////////////////////////////////////
     // 港口
     CityData::CityData()
-        : m_FileWriter( nullptr )
-        , m_Offset( 0 )
-        , m_CityId( 0 )
+        : m_CityId( 0 )
     {}
 
     CityData::~CityData()
     {
-        //cout << "[MESSAGE] ~CityData(" << m_CityId << ")" << endl;
     }
 
-    void CityData::Init( int cityId, Kafka::FileWriter* fileWriter, size_t offset )
+    void CityData::WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream )
     {
-        /*
-        if ( fileWriter->IsOpened() )
+        stream->WriteInt8( m_Avalible );
+        stream->Skip( 1 );
+        stream->WriteInt16( m_Facility );
+        stream->Skip( 2 );
+        stream->WriteInt16( m_Bussiness );
+        stream->Skip( 4 );
+        stream->WriteInt16( m_Military );
+        stream->Skip( 4 );
+
+        for ( int i = 0; i < MAX_TEAM_IN_CITY; ++i )
         {
-            m_CityId = cityId;
-            m_FileWriter = fileWriter;
-            m_Offset = offset;
-
-            // 讀取城市能見度
-            m_FileWriter->GetByte( offset + CD_OFFSET_AVALIBLE,
-                CD_LENGTH_AVALIBLE,
-                &m_Avalible,
-                sizeof( m_Avalible ) );
-            // 讀取城市設施
-            m_FileWriter->GetByte( offset + CD_OFFSET_FACILITY,
-                CD_LENGTH_FACILITY,
-                &m_Facility,
-                sizeof( m_Facility ) );
-            // 讀取城市發展度
-            m_FileWriter->GetByte( offset + CD_OFFSET_BUSSINESS,
-                CD_LENGTH_BUSSINESS,
-                &m_Bussiness,
-                sizeof( m_Bussiness ) );
-            // 讀取城市武裝度
-            m_FileWriter->GetByte( offset + CD_OFFSET_MILITARY,
-                CD_LENGTH_MILITARY,
-                &m_Military,
-                sizeof( m_Military ) );
-            // 讀取城市佔有率
-            for ( int i = 0; i < MAX_TEAM_IN_CITY; ++i )
-            {
-                m_FileWriter->GetByte( offset + CD_OFFSET_MARKET + ( CD_LENGTH_MARKET * i ) + MARKET_TEAM,
-                    CD_LENGTH_MARKETTEAM,
-                    &( m_MarketShare[ i ].TeamId ),
-                    sizeof( m_MarketShare[ i ].TeamId ) );
-                m_FileWriter->GetByte( offset + CD_OFFSET_MARKET + ( CD_LENGTH_MARKET * i ) + MARKET_SHARE,
-                    CD_LENGTH_MARKETSHARE,
-                    &( m_MarketShare[ i ].MarketShare ),
-                    sizeof( m_MarketShare[ i ].MarketShare ) );
-            }
-
-            // 讀取城市特產
-            for ( int i = 0; i < MAX_SPECIALTY; ++i )
-            {
-                m_FileWriter->GetByte( offset + CD_OFFSET_SPECIALTY + ( CD_LENGTH_SPECIALTY * i ) + SPECIALTY_STATUS,
-                    CD_LENGTH_SPECIALTYSTATUS,
-                    &( m_SpecialProduct[ i ].Tradeable ),
-                    sizeof( m_SpecialProduct[ i ].Tradeable ) );
-                m_FileWriter->GetByte( offset + CD_OFFSET_SPECIALTY + ( CD_LENGTH_SPECIALTY * i ) + SPECIALTY_PRICE,
-                    CD_LENGTH_SPECIALTYPRICE,
-                    &( m_SpecialProduct[ i ].Price ),
-                    sizeof( m_SpecialProduct[ i ].Price ) );
-                m_FileWriter->GetByte( offset + CD_OFFSET_SPECIALTY + ( CD_LENGTH_SPECIALTY * i ) + SPECIALTY_NUMBER,
-                    CD_LENGTH_SPECIALTYNUMBER,
-                    &( m_SpecialProduct[ i ].Amount ),
-                    sizeof( m_SpecialProduct[ i ].Amount ) );
-            }
-
-            //m_FileWriter->GetByte(offset + CD_OFFSET_AVALIBLE, CD_LENGTH_AVALIBLE, &m_Avalible, sizeof(m_Avalible));
-
-            // 讀取城市交易品
-            //m_FileWriter->GetByte(offset + CD_OFFSET_AVALIBLE, CD_LENGTH_AVALIBLE, &m_Avalible, sizeof(m_Avalible));
-
-            // 讀取城市流行品
-            //m_FileWriter->GetByte(offset + CD_OFFSET_AVALIBLE, CD_LENGTH_AVALIBLE, &m_Avalible, sizeof(m_Avalible));
-
-            // 讀取城市狀態
-            //m_FileWriter->GetByte(offset + CD_OFFSET_AVALIBLE, CD_LENGTH_AVALIBLE, &m_Avalible, sizeof(m_Avalible));
+            stream->WriteInt8( m_MarketShare[ i ].TeamId );
+            stream->WriteInt8( m_MarketShare[ i ].MarketShare );
         }
-        */
+
+        for ( int i = 0; i < MAX_SPECIALTY; ++i )
+        {
+            stream->WriteInt8( m_SpecialProduct[ i ].Tradeable );
+            stream->WriteInt16( m_SpecialProduct[ i ].Price );
+            stream->WriteInt16( m_SpecialProduct[ i ].Amount );
+        }
+
+        for ( int i = 0; i < MAX_PRODUCT; ++i )
+        {
+            stream->WriteInt16( m_Products[ i ] );
+        }
+
+        for ( int i = 0; i < MAX_POPULAR; ++i )
+        {
+            stream->WriteInt8( m_Popular[ i ].ProductId );
+            stream->WriteInt8( m_Popular[ i ].PopularStage );
+        }
+
+        stream->WriteInt16( m_Status );
+    }
+
+    void CityData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
+    {
+        m_Avalible = stream->ReadInt8();
+        stream->Skip( 1 );
+        m_Facility = stream->ReadInt16();
+        stream->Skip( 2 );
+        m_Bussiness = stream->ReadInt16();
+        stream->Skip( 4 );
+        m_Military = stream->ReadInt16();
+        stream->Skip( 4 );
+
+        for ( int i = 0; i < MAX_TEAM_IN_CITY; ++i )
+        {
+            m_MarketShare[ i ].TeamId = stream->ReadInt8();
+            m_MarketShare[ i ].MarketShare = stream->ReadInt8();
+        }
+
+        for ( int i = 0; i < MAX_SPECIALTY; ++i )
+        {
+            m_SpecialProduct[ i ].Tradeable = stream->ReadInt8();
+            m_SpecialProduct[ i ].Price = stream->ReadInt16();
+            m_SpecialProduct[ i ].Amount = stream->ReadInt16();
+        }
+
+        for ( int i = 0; i < MAX_PRODUCT; ++i )
+        {
+            m_Products[ i ] = stream->ReadInt16();
+        }
+
+        for ( int i = 0; i < MAX_POPULAR; ++i )
+        {
+            m_Popular[ i ].ProductId = stream->ReadInt8();
+            m_Popular[ i ].PopularStage = stream->ReadInt8();
+        }
+
+        m_Status = stream->ReadInt16();
     }
 } // namespace Dk4

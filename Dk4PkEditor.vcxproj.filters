@@ -22,11 +22,11 @@
     <Filter Include="Source Files\Data">
       <UniqueIdentifier>{e2381af8-2adf-476b-8741-1c13de568d4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{75762f2f-d3be-4055-bca3-1d03e1d22d89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Libraries\TinyFileDialogs\tinyfiledialogs.h">
       <Filter>TinyFileDialogs</Filter>
     </ClInclude>
@@ -43,7 +43,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pch.h">
-      <Filter>Header Files</Filter>
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Data\Item.h">
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +69,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PchCreator.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Data\Item.cpp">
+      <Filter>Source Files\Data</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
