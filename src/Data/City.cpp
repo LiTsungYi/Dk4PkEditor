@@ -56,9 +56,9 @@ namespace Dk4
 
     void CityData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
     {
-        m_Avalible = stream->ReadInt8();
+        m_Avalible = static_cast<CityAvailable>( stream->ReadInt8() );
         stream->Skip( 1 );
-        m_Facility = stream->ReadInt16();
+        m_Facility = static_cast<CityFacility>( stream->ReadInt16() );
         stream->Skip( 2 );
         m_Bussiness = stream->ReadInt16();
         stream->Skip( 4 );
@@ -73,7 +73,7 @@ namespace Dk4
 
         for ( int i = 0; i < MAX_SPECIALTY; ++i )
         {
-            m_SpecialProduct[ i ].Tradeable = stream->ReadInt8();
+            m_SpecialProduct[ i ].Tradeable = static_cast<Tradeability>( stream->ReadInt8() );
             m_SpecialProduct[ i ].Price = stream->ReadInt16();
             m_SpecialProduct[ i ].Amount = stream->ReadInt16();
         }
