@@ -13,15 +13,15 @@ namespace Dk4
     ItemData::~ItemData()
     {}
 
-    void ItemData::WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream )
+    void ItemData::WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream )
     {
         stream->WriteInt8( m_owned );
-        stream->SkipWrite( 1 );
+        stream->Skip( 1 );
     }
 
-    void ItemData::ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream )
+    void ItemData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
     {
         m_owned = stream->ReadInt8();
-        stream->SkipRead( 1 );
+        stream->Skip( 1 );
     }
 } // namespace Dk4

@@ -11,43 +11,43 @@ namespace Kafka
 namespace Dk4
 {
     //////////////////////////////////////////////////////////////////////////
-    // ®ü­û 
+    // ï¿½ï¿½ï¿½ï¿½ 
     enum BaseSkill
     {
-        BASE_CON,       // Åé¤O
-        BASE_AGI,       // ±Ó±¶
-        BASE_CRM,       // ¾y¤O
-        BASE_INT,       // ´¼¤O
-        BASE_SPI,       // ºë¯«
-        BASE_LUK,       // ¹B®ð
-        BASE_MAX        // §Þ¯à¼Æ
+        BASE_CON,       // ï¿½ï¿½O
+        BASE_AGI,       // ï¿½Ó±ï¿½
+        BASE_CRM,       // ï¿½yï¿½O
+        BASE_INT,       // ï¿½ï¿½ï¿½O
+        BASE_SPI,       // ï¿½ë¯«
+        BASE_LUK,       // ï¿½Bï¿½ï¿½
+        BASE_MAX        // ï¿½Þ¯ï¿½ï¿½
     };
 
     enum Exp
     {
-        EXP_1,          // °Ó·~
-        EXP_2,          // ­x¨Æ
-        EXP_MAX         // Á`¼Æ
+        EXP_1,          // ï¿½Ó·~
+        EXP_2,          // ï¿½xï¿½ï¿½
+        EXP_MAX         // ï¿½`ï¿½ï¿½
     };
 
     enum Equipment
     {
-        EQUIP_WEAPON,   // ªZ¾¹
-        EQUIP_ARMOR,    // ¨¾¨ã
-        EQUIP_ITEM_1,   // ¹D¨ã¢°
-        EQUIP_ITEM_2,   // ¹D¨ã¢±
-        EQUIP_ITEM_3,   // ¹D¨ã¢²
-        EQUIP_MAX       // Á`¼Æ
+        EQUIP_WEAPON,   // ï¿½Zï¿½ï¿½
+        EQUIP_ARMOR,    // ï¿½ï¿½ï¿½ï¿½
+        EQUIP_ITEM_1,   // ï¿½Dï¿½ã¢°
+        EQUIP_ITEM_2,   // ï¿½Dï¿½ã¢±
+        EQUIP_ITEM_3,   // ï¿½Dï¿½ã¢²
+        EQUIP_MAX       // ï¿½`ï¿½ï¿½
     };
 
-    class SailorData : public Kafka::Stream::ISerializable
+    class SailorData : public Kafka::ISerializable
     {
     public:
         SailorData();
         ~SailorData();
 
-        virtual void WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream );
-        virtual void ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream );
+        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
 
         size_t m_SailorId;
 

@@ -8,7 +8,7 @@ namespace Dk4
 {
 
     //////////////////////////////////////////////////////////////////////////
-    // ®ü­û
+    // ï¿½ï¿½ï¿½ï¿½
     SailorData::SailorData()
         : m_SailorId( 0 )
         , m_Team( 0 )
@@ -36,10 +36,10 @@ namespace Dk4
     {
     }
 
-    void SailorData::WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream )
+    void SailorData::WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream )
     {
         stream->WriteInt8( m_Team );
-        stream->SkipWrite( 1 );
+        stream->Skip( 1 );
         for ( size_t i = 0; i < BASE_MAX; i++ )
         {
             stream->WriteInt8( m_Base[ i ] );
@@ -60,10 +60,10 @@ namespace Dk4
         }
     }
 
-    void SailorData::ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream )
+    void SailorData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
     {
         m_Team = stream->ReadInt8();
-        stream->SkipRead( 1 );
+        stream->Skip( 1 );
         for ( size_t i = 0; i < BASE_MAX; i++ )
         {
             m_Base[ i ] = stream->ReadInt8();

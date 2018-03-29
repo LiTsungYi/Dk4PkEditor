@@ -12,29 +12,29 @@ namespace Kafka
 namespace Dk4
 {
     //////////////////////////////////////////////////////////////////////////
-    // ´ä¤f
+    // ï¿½ï¿½f
 
     enum CityAvailable
     {
-        Unknown = 0, // ¸ê°T¥¼ª¾
-        Known = 1, // ¸ê°T¤wª¾
-        New = 3, // ·s´ä¶}ÅP
+        Unknown = 0, // ï¿½ï¿½Tï¿½ï¿½ï¿½ï¿½
+        Known = 1, // ï¿½ï¿½Tï¿½wï¿½ï¿½
+        New = 3, // ï¿½sï¿½ï¿½}ï¿½P
     };
 
     enum CityFacility
     {
-        Inn = 0x0001, // ®ÈÀ]
-        Secret = 0x0002, // ¿ò¸ñ
-        Chuch = 0x0004, // ±Ð°ó
-        Gate = 0x0008, // «°ªù
-        Place = 0x0100, // ¼s³õ
-        Trade = 0x0200, // ¥æ©ö©Ò
-        Ship = 0x0400, // ³y²î¼t
-        Port = 0x0800, // ½XÀY
-        Wine = 0x1000, // °sÀ]
-        Guild = 0x2000, // ¦P·~¤½·|
-        Pla = 0x4000, // ¤ý®c
-        Gov = 0x8000, // Á`·þ©²
+        Inn = 0x0001, // ï¿½ï¿½ï¿½]
+        Secret = 0x0002, // ï¿½ï¿½ï¿½
+        Chuch = 0x0004, // ï¿½Ð°ï¿½
+        Gate = 0x0008, // ï¿½ï¿½ï¿½ï¿½
+        Place = 0x0100, // ï¿½sï¿½ï¿½
+        Trade = 0x0200, // ï¿½ï¿½ï¿½ï¿½ï¿½
+        Ship = 0x0400, // ï¿½yï¿½ï¿½t
+        Port = 0x0800, // ï¿½Xï¿½Y
+        Wine = 0x1000, // ï¿½sï¿½]
+        Guild = 0x2000, // ï¿½Pï¿½~ï¿½ï¿½ï¿½|
+        Pla = 0x4000, // ï¿½ï¿½ï¿½c
+        Gov = 0x8000, // ï¿½`ï¿½ï¿½ï¿½ï¿½
     };
 
     enum Tradeability
@@ -45,59 +45,59 @@ namespace Dk4
 
     enum CityStatus
     {
-        War = 0x00, // ¾Ôª§
-        Sick = 0x01, // ¯e¯f
-        Food = 0x02, // °§¯î
-        Good = 0x03, // ¦n´º®ð
-        Bad = 0x04, // ¤£´º®ð
-        NotEnough1 = 0x05, // ¯S©w³f«~¤£¨¬
-        NotEnough2 = 0x06, // ¯S©w³f«~¤£¨¬
-        NotEnough3 = 0x07, // ¯S©w³f«~¤£¨¬
-        NotEnough4 = 0x08, // ¯S©w³f«~¤£¨¬
-        NotEnough5 = 0x09, // ¯S©w³f«~¤£¨¬
-        NotEnough6 = 0x0A, // ¯S©w³f«~¤£¨¬
-        Normal = 0x0C, // ¥¿±`
+        War = 0x00, // ï¿½Ôªï¿½
+        Sick = 0x01, // ï¿½eï¿½f
+        Food = 0x02, // ï¿½ï¿½ï¿½ï¿½
+        Good = 0x03, // ï¿½nï¿½ï¿½ï¿½ï¿½
+        Bad = 0x04, // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        NotEnough1 = 0x05, // ï¿½Sï¿½wï¿½fï¿½~ï¿½ï¿½ï¿½ï¿½
+        NotEnough2 = 0x06, // ï¿½Sï¿½wï¿½fï¿½~ï¿½ï¿½ï¿½ï¿½
+        NotEnough3 = 0x07, // ï¿½Sï¿½wï¿½fï¿½~ï¿½ï¿½ï¿½ï¿½
+        NotEnough4 = 0x08, // ï¿½Sï¿½wï¿½fï¿½~ï¿½ï¿½ï¿½ï¿½
+        NotEnough5 = 0x09, // ï¿½Sï¿½wï¿½fï¿½~ï¿½ï¿½ï¿½ï¿½
+        NotEnough6 = 0x0A, // ï¿½Sï¿½wï¿½fï¿½~ï¿½ï¿½ï¿½ï¿½
+        Normal = 0x0C, // ï¿½ï¿½ï¿½`
     };
 
-    struct Market       // ¦û¦³²v
+    struct Market       // ï¿½ï¿½ï¿½ï¿½ï¿½v
     {
-        char   TeamId;          // ¶Õ¤O¥N¸¹
-        char   MarketShare;     // ¦û¦³²v
+        char   TeamId;          // ï¿½Õ¤Oï¿½Nï¿½ï¿½
+        char   MarketShare;     // ï¿½ï¿½ï¿½ï¿½ï¿½v
     };
 
-    struct Specialty // ¯S²£
+    struct Specialty // ï¿½Sï¿½ï¿½
     {
-        Tradeability Tradeable; // 0: ¤£¥i¥æ©ö, 1: ¥i¥H¥æ©ö
-        short Price; // »ù®æ
-        short Amount; // ¼Æ¶q
+        Tradeability Tradeable; // 0: ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½, 1: ï¿½iï¿½Hï¿½ï¿½ï¿½
+        short Price; // ï¿½ï¿½ï¿½ï¿½
+        short Amount; // ï¿½Æ¶q
     };
 
-    struct Popular      // ¬y¦æ«~
+    struct Popular      // ï¿½yï¿½ï¿½~
     {
-        char   ProductId;       // ¬y¦æ³f«~
-        char   PopularStage;    // ¬y¦æ¶¥¬q
+        char   ProductId;       // ï¿½yï¿½ï¿½fï¿½~
+        char   PopularStage;    // ï¿½yï¿½æ¶¥ï¿½q
     };
 
-    class CityData : public Kafka::Stream::ISerializable
+    class CityData : public Kafka::ISerializable
     {
     public:
         CityData();
         ~CityData();
 
-        virtual void WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream );
-        virtual void ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream );
+        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
 
         size_t          m_CityId;
 
         CityAvailable m_Avalible;
-        CityFacility m_Facility; // ³]¬I
-        short m_Bussiness; // µo®i«×
-        short m_Military; // ªZ¸Ë«×
-        Market m_MarketShare[ MAX_TEAM_IN_CITY ]; // ¦û¦³²v
-        Specialty m_SpecialProduct[ MAX_SPECIALTY ]; // ¯S²£
-        short m_Products[ MAX_PRODUCT ]; // ¥æ©ö«~
-        Popular m_Popular[ MAX_POPULAR ]; // ¬y¦æ«~
-        short m_Status; // «°¥«ª¬ºA
+        CityFacility m_Facility; // ï¿½]ï¿½I
+        short m_Bussiness; // ï¿½oï¿½iï¿½ï¿½
+        short m_Military; // ï¿½Zï¿½Ë«ï¿½
+        Market m_MarketShare[ MAX_TEAM_IN_CITY ]; // ï¿½ï¿½ï¿½ï¿½ï¿½v
+        Specialty m_SpecialProduct[ MAX_SPECIALTY ]; // ï¿½Sï¿½ï¿½
+        short m_Products[ MAX_PRODUCT ]; // ï¿½ï¿½ï¿½ï¿½~
+        Popular m_Popular[ MAX_POPULAR ]; // ï¿½yï¿½ï¿½~
+        short m_Status; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½A
     };
 
 } // namespace Dk4

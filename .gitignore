@@ -35,7 +35,5 @@
 /obj
 /bin
 /ipch
-.vs/Dk4PkEditor
-*.db
-.vs/
+.vs
 Debug

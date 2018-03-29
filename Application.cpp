@@ -14,8 +14,8 @@ namespace Dk4
     {
         if ( !OpenFile() )
         {
-            std::string title( "¿ù»~!" );
-            std::string message( "¶}±ÒÀÉ®×¥¢±Ñ" );
+            std::string title( "ï¿½ï¿½ï¿½~!" );
+            std::string message( "ï¿½}ï¿½ï¿½ï¿½É®×¥ï¿½ï¿½ï¿½" );
 
             tinyfd_messageBox( title.c_str(), message.c_str(), "ok", "error", 0 );
             return 0;
@@ -23,8 +23,8 @@ namespace Dk4
 
         if ( !ValidateFile() )
         {
-            std::string title( "¿ù»~!" );
-            std::string message( "ÀÉ®×ÅçÃÒ¥¢±Ñ" );
+            std::string title( "ï¿½ï¿½ï¿½~!" );
+            std::string message( "ï¿½É®ï¿½ï¿½ï¿½ï¿½Ò¥ï¿½ï¿½ï¿½" );
 
             tinyfd_messageBox( title.c_str(), message.c_str(), "ok", "error", 0 );
             return 0;
@@ -44,13 +44,13 @@ namespace Dk4
         {
             "*.dk4"
         };
-        std::string fileName = tinyfd_openFileDialog( "¿ï¾Ü°O¿ýÀÉ", "", 1, filters, "", 0 );
+        std::string fileName = tinyfd_openFileDialog( "ï¿½ï¿½Ü°Oï¿½ï¿½ï¿½ï¿½", "", 1, filters, 0 );
         if ( fileName.length() == 0 )
         {
             return false;
         }
 
-        m_stream = std::shared_ptr< Kafka::Stream::InputFileStream >( new Kafka::Stream::InputFileStream( fileName, true ));
+        m_stream = std::shared_ptr< Kafka::InputFileStream >( new Kafka::InputFileStream( fileName, true ) );
         return m_stream && m_stream->CanRead();
     }
 
@@ -64,46 +64,46 @@ namespace Dk4
     void Console::LoadLeader()
     {
         SailorData sailorLeader;
-        m_stream->SeekRead( SAILOR_LEADER_OFFSET );
+        m_stream->Seek( SAILOR_LEADER_OFFSET );
         sailorLeader.ReadFromStream( m_stream );
 
-        std::string title( "¥D¨¤ªº¶Õ¤O" );
+        std::string title( "ï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½Õ¤O" );
         m_teamId = sailorLeader.m_Team;
         tinyfd_messageBox( title.c_str(), TEAM_NAME[ m_teamId ].c_str(), "ok", "error", 0 );
     }
 
     void Console::LoadSailors()
     {
-        m_stream->SeekRead( SAILOR_OFFSET );
+        m_stream->Seek( SAILOR_OFFSET );
         for ( int i = 0; i < SAILOR_NUMBER; ++i )
         {
             m_sailorData[ i ].m_SailorId = i;
             m_sailorData[ i ].ReadFromStream( m_stream );
             if ( i <= NON_NPC_SAILOR_NUMBER )
             {
-                // ÀË¬d¬O§_¬°¥»¶Õ¤O®ü­û
+                // ï¿½Ë¬dï¿½Oï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½Õ¤Oï¿½ï¿½ï¿½ï¿½
                 if ( m_sailorData[ i ].m_Team != m_teamId )
                 {
-                    std::string title2( "¬O§_ÁÜ½Ð" );
+                    std::string title2( "ï¿½Oï¿½_ï¿½Ü½ï¿½" );
                     tinyfd_messageBox( title2.c_str(), SAILOR_NAME[ i ].c_str(), "ok", "error", 0 );
                 }
                 else
                 {
                     switch ( i )
                     {
-                    case 39: // ¸â©i¯÷¡D§J§QºÖ¼w
-                    case 42: // ©¼¼wÃ¹¡D¼w¡D¤Ú¾|­}´µ
-                    case 44: // »®¼w©i¡Dªü¥±¬ü¦·¡D¤Ú®L
-                    case 45: // ¤Ú¤Ú¬¥¨F¡Dªk´µº¸¡D®ü¹p¤B
-                    case 52: // ¯ÁÀR¡D¨Ó®q
-                    case 54: // ­}¼Úºq¡D¼w¡D®J´µ±d¯S
-                    case 66: // ¥ì¤å¡D¥§­C­}
-                    case 72: // ªâ¡D¥¬Äõ¬ì
+                    case 39: // ï¿½ï¿½iï¿½ï¿½ï¿½Dï¿½Jï¿½Qï¿½Ö¼w
+                    case 42: // ï¿½ï¿½ï¿½wÃ¹ï¿½Dï¿½wï¿½Dï¿½Ú¾|ï¿½}ï¿½ï¿½
+                    case 44: // ï¿½ï¿½ï¿½wï¿½iï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½Ú®L
+                    case 45: // ï¿½Ú¤Ú¬ï¿½ï¿½Fï¿½Dï¿½kï¿½ï¿½ï¿½ï¿½ï¿½Dï¿½ï¿½ï¿½pï¿½B
+                    case 52: // ï¿½ï¿½ï¿½Rï¿½Dï¿½Ó®q
+                    case 54: // ï¿½}ï¿½Úºqï¿½Dï¿½wï¿½Dï¿½Jï¿½ï¿½ï¿½dï¿½S
+                    case 66: // ï¿½ï¿½ï¿½Dï¿½ï¿½ï¿½Cï¿½}
+                    case 72: // ï¿½ï¿½Dï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     {
-                        // ÀË¬d¬O§_¬°¶Õ¤O¤w¸g·À¤`
+                        // ï¿½Ë¬dï¿½Oï¿½_ï¿½ï¿½ï¿½Õ¤Oï¿½wï¿½gï¿½ï¿½ï¿½`
                         if ( m_sailorData[ i ].m_Team == TEAM_JOINABLE )
                         {
-                            std::string title2( "¬O§_ÁÜ½Ð" );
+                            std::string title2( "ï¿½Oï¿½_ï¿½Ü½ï¿½" );
                             tinyfd_messageBox( title2.c_str(), SAILOR_NAME[ i ].c_str(), "ok", "error", 0 );
                         }
                     }
@@ -116,7 +116,7 @@ namespace Dk4
 
     void Console::LoadCities()
     {
-        m_stream->SeekRead( CITY_OFFSET );
+        m_stream->Seek( CITY_OFFSET );
         for ( int i = 0; i < CITY_NUMBER; ++i )
         {
             m_cityData[ i ].m_CityId = i;
@@ -127,7 +127,7 @@ namespace Dk4
     void Console::LoadItems()
     {
         // char myOwnValue = 0x0C;
-        m_stream->SeekRead( ITEM_OFFSET );
+        m_stream->Seek( ITEM_OFFSET );
         for ( int i = 0; i < ITEM_NUMBER; ++i )
         {
             m_itemData[ i ].m_itemId = i;
