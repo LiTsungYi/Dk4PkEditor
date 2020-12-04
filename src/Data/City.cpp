@@ -19,13 +19,13 @@ namespace Dk4
     void CityData::WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream )
     {
         stream->WriteInt8( m_Avalible );
-        stream->Skip( 1 );
+        stream->SkipWrite( 1 );
         stream->WriteInt16( m_Facility );
-        stream->Skip( 2 );
+        stream->SkipWrite( 2 );
         stream->WriteInt16( m_Bussiness );
-        stream->Skip( 4 );
+        stream->SkipWrite( 4 );
         stream->WriteInt16( m_Military );
-        stream->Skip( 4 );
+        stream->SkipWrite( 4 );
 
         for ( int i = 0; i < MAX_TEAM_IN_CITY; ++i )
         {
@@ -57,13 +57,13 @@ namespace Dk4
     void CityData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
     {
         m_Avalible = static_cast<CityAvailable>( stream->ReadInt8() );
-        stream->Skip( 1 );
+        stream->SkipRead( 1 );
         m_Facility = static_cast<CityFacility>( stream->ReadInt16() );
-        stream->Skip( 2 );
+        stream->SkipRead( 2 );
         m_Bussiness = stream->ReadInt16();
-        stream->Skip( 4 );
+        stream->SkipRead( 4 );
         m_Military = stream->ReadInt16();
-        stream->Skip( 4 );
+        stream->SkipRead( 4 );
 
         for ( int i = 0; i < MAX_TEAM_IN_CITY; ++i )
         {

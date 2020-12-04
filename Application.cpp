@@ -44,7 +44,7 @@ namespace Dk4
         {
             "*.dk4"
         };
-        std::string fileName = tinyfd_openFileDialog( "選擇記錄檔", "", 1, filters, 0 );
+        std::string fileName = tinyfd_openFileDialog( "選擇記錄檔", "", 1, filters, "", 0 );
         if ( fileName.length() == 0 )
         {
             return false;
@@ -64,7 +64,7 @@ namespace Dk4
     void Console::LoadLeader()
     {
         SailorData sailorLeader;
-        m_stream->Seek( SAILOR_LEADER_OFFSET );
+        m_stream->SeekRead( SAILOR_LEADER_OFFSET );
         sailorLeader.ReadFromStream( m_stream );
 
         std::string title( "主角的勢力" );
@@ -74,7 +74,7 @@ namespace Dk4
 
     void Console::LoadSailors()
     {
-        m_stream->Seek( SAILOR_OFFSET );
+        m_stream->SeekRead( SAILOR_OFFSET );
         for ( int i = 0; i < SAILOR_NUMBER; ++i )
         {
             m_sailorData[ i ].m_SailorId = i;
@@ -116,7 +116,7 @@ namespace Dk4
 
     void Console::LoadCities()
     {
-        m_stream->Seek( CITY_OFFSET );
+        m_stream->SeekRead( CITY_OFFSET );
         for ( int i = 0; i < CITY_NUMBER; ++i )
         {
             m_cityData[ i ].m_CityId = i;
@@ -127,7 +127,7 @@ namespace Dk4
     void Console::LoadItems()
     {
         // char myOwnValue = 0x0C;
-        m_stream->Seek( ITEM_OFFSET );
+        m_stream->SeekRead( ITEM_OFFSET );
         for ( int i = 0; i < ITEM_NUMBER; ++i )
         {
             m_itemData[ i ].m_itemId = i;
