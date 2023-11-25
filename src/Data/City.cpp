@@ -16,7 +16,7 @@ namespace Dk4
     {
     }
 
-    void CityData::WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream )
+    void CityData::WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream )
     {
         stream->WriteInt8( m_Avalible );
         stream->SkipWrite( 1 );
@@ -54,7 +54,7 @@ namespace Dk4
         stream->WriteInt16( m_Status );
     }
 
-    void CityData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
+    void CityData::ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream )
     {
         m_Avalible = static_cast<CityAvailable>( stream->ReadInt8() );
         stream->SkipRead( 1 );

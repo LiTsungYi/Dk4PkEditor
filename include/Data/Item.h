@@ -11,14 +11,14 @@ namespace Kafka
 
 namespace Dk4
 {
-    class ItemData : public Kafka::ISerializable
+    class ItemData : public Kafka::Stream::ISerializable
     {
     public:
         ItemData();
         ~ItemData();
 
-        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
-        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
+        virtual void WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream );
 
         size_t          m_itemId;
 

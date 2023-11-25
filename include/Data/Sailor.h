@@ -40,14 +40,14 @@ namespace Dk4
         EQUIP_MAX       // Á`¼Æ
     };
 
-    class SailorData : public Kafka::ISerializable
+    class SailorData : public Kafka::Stream::ISerializable
     {
     public:
         SailorData();
         ~SailorData();
 
-        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
-        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
+        virtual void WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream );
 
         size_t m_SailorId;
 

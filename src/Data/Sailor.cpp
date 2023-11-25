@@ -36,7 +36,7 @@ namespace Dk4
     {
     }
 
-    void SailorData::WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream )
+    void SailorData::WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream )
     {
         stream->WriteInt8( m_Team );
         stream->SkipWrite( 1 );
@@ -60,7 +60,7 @@ namespace Dk4
         }
     }
 
-    void SailorData::ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream )
+    void SailorData::ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream )
     {
         m_Team = stream->ReadInt8();
         stream->SkipRead( 1 );

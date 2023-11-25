@@ -50,7 +50,7 @@ namespace Dk4
             return false;
         }
 
-        m_stream = std::shared_ptr< Kafka::InputFileStream >( new Kafka::InputFileStream( fileName, true ) );
+        m_stream = std::shared_ptr< Kafka::Stream::InputFileStream >( new Kafka::Stream::InputFileStream( fileName, true ) );
         return m_stream && m_stream->CanRead();
     }
 

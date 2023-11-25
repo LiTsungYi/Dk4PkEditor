@@ -78,14 +78,14 @@ namespace Dk4
         char   PopularStage;    // ¬y¦æ¶¥¬q
     };
 
-    class CityData : public Kafka::ISerializable
+    class CityData : public Kafka::Stream::ISerializable
     {
     public:
         CityData();
         ~CityData();
 
-        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
-        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
+        virtual void WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream );
 
         size_t          m_CityId;
 
