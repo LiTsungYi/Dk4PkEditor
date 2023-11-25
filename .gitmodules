@@ -1,0 +1,6 @@
+[submodule "tinyfiledialogs"]
+	path = tinyfiledialogs
+	url = http://git.code.sf.net/p/tinyfiledialogs/code
+[submodule "Kafka"]
+	path = Kafka
+	url = https://github.com/litsungyi/Kafka.git
