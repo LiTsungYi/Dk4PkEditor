@@ -8,7 +8,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dk4PkEditor", "Dk4PkEditor.
 		{FBB2314A-09C7-45D7-BAB0-6A2651A39702} = {FBB2314A-09C7-45D7-BAB0-6A2651A39702}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kafka", "..\Kafka\Kafka.vcxproj", "{FBB2314A-09C7-45D7-BAB0-6A2651A39702}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kafka", "Kafka\Kafka.vcxproj", "{FBB2314A-09C7-45D7-BAB0-6A2651A39702}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
