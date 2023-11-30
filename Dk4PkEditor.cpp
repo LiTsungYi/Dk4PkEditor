@@ -1,4 +1,4 @@
-// Dk4PkEditor.cpp : Defines the entry point for the console application.
+ï»¿// Dk4PkEditor.cpp : Defines the entry point for the console application.
 //
 
 #include "Pch.h"
@@ -26,13 +26,13 @@ int main( int argc, char* argv[] )
     char* buffer = new char[ BUFFER_SIZE ];
     buffer = static_cast< char* >( SecureZeroMemory( buffer, BUFFER_SIZE ) );
 
-    // ¶}±Ò¬ö¿ıÀÉ
-    cout << "¿ï¾Ü¶}±ÒªºÀÉ®× 0-7: ";
+    // é–‹å•Ÿç´€éŒ„æª”
+    cout << "é¸æ“‡é–‹å•Ÿçš„æª”æ¡ˆ 0-7: ";
     cin >> input;
 
     saveFile.OpenFile( atoi( &input ) );
 
-    // ÀË¬d¬ö¿ıÀÉ¬O§_¶}±Ò
+    // æª¢æŸ¥ç´€éŒ„æª”æ˜¯å¦é–‹å•Ÿ
     if ( saveFile.IsOpened() )
     {
         cout << "File opened" << endl;
@@ -41,7 +41,7 @@ int main( int argc, char* argv[] )
 
         readBytes = saveFile.GetByte( 0, VALIDATE_STRING_SIZE, buffer, BUFFER_SIZE );
 
-        // ÅçÃÒ¬O§_¬°¤j¯è®ü¥|¬ö¿ıÀÉ
+        // é©—è­‰æ˜¯å¦ç‚ºå¤§èˆªæµ·å››ç´€éŒ„æª”
         if ( 0 == readBytes )
         {
             cout << "Read nothing!" << endl;
@@ -50,36 +50,36 @@ int main( int argc, char* argv[] )
         {
             if ( 0 == strcmp( buffer, VALIDATE_STRING.c_str() ) )
             {
-                // ÅçÃÒ³q¹L
+                // é©—è­‰é€šé
                 cout << "File validate success!" << endl;
 
-                // ¨ú±o¥D¨¤¸ê®Æ
+                // å–å¾—ä¸»è§’è³‡æ–™
                 SailorData sailorLeader;
                 sailorLeader.Init( -1, &saveFile, SAILOR_LEADER_OFFSET );
 
                 myTeamId = sailorLeader.m_Team;
 
-                cout << "¥D¨¤ªº¶Õ¤O¬°¡G" << TEAM_NAME[ myTeamId ] << endl;
+                cout << "ä¸»è§’çš„å‹¢åŠ›ç‚ºï¼š" << TEAM_NAME[ myTeamId ] << endl;
 
-                // ¨ú±o®ü­û¸ê®Æ
+                // å–å¾—æµ·å“¡è³‡æ–™
                 SailorData* sailorData = new SailorData[ SAILOR_NUMBER ];
 
                 for ( int i = 0, offset = SAILOR_OFFSET; i < SAILOR_NUMBER; ++i, offset += SAILOR_DATA_SIZE )
                 {
                     sailorData[ i ].Init( i, &saveFile, offset );
 
-                    cout << SAILOR_NAME[ i ] << " ¥Ø«e¬° " << TEAM_NAME[ sailorData[ i ].m_Team ] << " ªº¦¨­û" << endl;
+                    cout << SAILOR_NAME[ i ] << " ç›®å‰ç‚º " << TEAM_NAME[ sailorData[ i ].m_Team ] << " çš„æˆå“¡" << endl;
 
                     if ( i <= NON_NPC_SAILOR_NUMBER )
                     {
-                        // ÀË¬d¬O§_¬°¥»¶Õ¤O®ü­û
+                        // æª¢æŸ¥æ˜¯å¦ç‚ºæœ¬å‹¢åŠ›æµ·å“¡
                         if ( sailorData[ i ].m_Team != myTeamId )
                         {
-                            cout << "¬O§_ÁÜ½Ğ " << SAILOR_NAME[ i ] << " ¥[¤J§Ú­x¡H (y/n)";
+                            cout << "æ˜¯å¦é‚€è«‹ " << SAILOR_NAME[ i ] << " åŠ å…¥æˆ‘è»ï¼Ÿ (y/n)";
                             cin >> input;
                             if ( 'y' == input )
                             {
-                                // ÁÜ½Ğ¥[¤J
+                                // é‚€è«‹åŠ å…¥
                                 saveFile.SetByte( offset, 1, &myTeamId, sizeof( int ) );
                             }
                         }
@@ -88,23 +88,23 @@ int main( int argc, char* argv[] )
                     {
                         switch ( i )
                         {
-                        case 39: // ¸â©i¯÷¡D§J§QºÖ¼w
-                        case 42: // ©¼¼wÃ¹¡D¼w¡D¤Ú¾|­}´µ
-                        case 44: // »®¼w©i¡Dªü¥±¬ü¦·¡D¤Ú®L
-                        case 45: // ¤Ú¤Ú¬¥¨F¡Dªk´µº¸¡D®ü¹p¤B
-                        case 52: // ¯ÁÀR¡D¨Ó®q
-                        case 54: // ­}¼Úºq¡D¼w¡D®J´µ±d¯S
-                        case 66: // ¥ì¤å¡D¥§­C­}
-                        case 72: // ªâ¡D¥¬Äõ¬ì
+                        case 39: // è©¹å§†èŒ²ï¼å…‹åˆ©ç¦å¾·
+                        case 42: // å½¼å¾·ç¾…ï¼å¾·ï¼å·´é­¯è¿ªæ–¯
+                        case 44: // èµ«å¾·å§†ï¼é˜¿å¼—ç¾æœµï¼å·´å¤
+                        case 45: // å·´å·´æ´›æ²™ï¼æ³•æ–¯çˆ¾ï¼æµ·é›·ä¸
+                        case 52: // ç´¢éœï¼ä¾†å³¶
+                        case 54: // è¿ªæ­æ­Œï¼å¾·ï¼åŸƒæ–¯åº·ç‰¹
+                        case 66: // ä¼Šæ–‡ï¼å°¼è€¶è¿ª
+                        case 72: // èŠ¬ï¼å¸ƒè˜­ç§‘
                         {
-                            // ÀË¬d¬O§_¬°¶Õ¤O¤w¸g·À¤`
+                            // æª¢æŸ¥æ˜¯å¦ç‚ºå‹¢åŠ›å·²ç¶“æ»…äº¡
                             if ( sailorData[ i ].m_Team == TEAM_JOINABLE )
                             {
-                                cout << "¬O§_ÁÜ½Ğ " << SAILOR_NAME[ i ] << " ¥[¤J§Ú­x¡H (y/n)";
+                                cout << "æ˜¯å¦é‚€è«‹ " << SAILOR_NAME[ i ] << " åŠ å…¥æˆ‘è»ï¼Ÿ (y/n)";
                                 cin >> input;
                                 if ( 'y' == input )
                                 {
-                                    // ÁÜ½Ğ¥[¤J
+                                    // é‚€è«‹åŠ å…¥
                                     saveFile.SetByte( offset, 1, &myTeamId, sizeof( int ) );
                                 }
                             }
@@ -114,15 +114,15 @@ int main( int argc, char* argv[] )
                     }
                 }
 
-                // ¨ú±o´ä¤f¸ê®Æ
+                // å–å¾—æ¸¯å£è³‡æ–™
                 CityData* cityData = new CityData[ CITY_NUMBER ];
 
                 for ( int i = 0, offset = CITY_OFFSET; i < CITY_NUMBER; ++i, offset += CITY_DATA_SIZE )
                 {
                     cityData[ i ].Init( i, &saveFile, offset );
 
-                    cout << CITY_NAME[ i ] << " [°Ó:" << cityData[ i ].m_Bussiness
-                        << "/ªZ:" << cityData[ i ].m_Military << "]" << endl;
+                    cout << CITY_NAME[ i ] << " [å•†:" << cityData[ i ].m_Bussiness
+                        << "/æ­¦:" << cityData[ i ].m_Military << "]" << endl;
 
                     for ( int j = 0; j<MAX_TEAM_IN_CITY; ++j )
                     {
@@ -158,22 +158,22 @@ int main( int argc, char* argv[] )
                     }
                 }
 
-                // ¶}ÅP·s´ä
+                // é–‹é—¢æ–°æ¸¯
                 for ( int i = 0; i < NEW_CITY_NUMBER; ++i )
                 {
                     char newCityOpend;
                     size_t offset = NEW_CITY_OFFSET[ i ];
 
                     saveFile.GetByte( NEW_CITY_OFFSET[ i ], 1, &newCityOpend, sizeof( newCityOpend ) );
-                    cout << "´ä¤f " << NEW_CITY_NAME[ i ] << " (" << static_cast< int >( newCityOpend ) << ")" << endl;
+                    cout << "æ¸¯å£ " << NEW_CITY_NAME[ i ] << " (" << static_cast< int >( newCityOpend ) << ")" << endl;
                     if ( CITY_OPENED != newCityOpend )
                     {
-                        // ÀË¬d´ä¤f¬O§_¤w¸g¶}´ä
-                        cout << "¬O§_¶}ÅP´ä¤f " << NEW_CITY_NAME[ i ] << " ¡H (y/n)";
+                        // æª¢æŸ¥æ¸¯å£æ˜¯å¦å·²ç¶“é–‹æ¸¯
+                        cout << "æ˜¯å¦é–‹é—¢æ¸¯å£ " << NEW_CITY_NAME[ i ] << " ï¼Ÿ (y/n)";
                         cin >> input;
                         if ( 'y' == input )
                         {
-                            // ¶}ÅP´ä¤f
+                            // é–‹é—¢æ¸¯å£
                             saveFile.SetByte( offset, 1, &CITY_OPENED, sizeof( CITY_OPENED ) );
                             saveFile.SetByte( offset + CD_LENGTH_FACILITY, 2, &CITY_HOUSE_ALL, sizeof( CITY_HOUSE_ALL ) );
                         }
@@ -185,7 +185,7 @@ int main( int argc, char* argv[] )
                 for ( int i = 0, offset = ITEM_OFFSET; i < ITEM_NUMBER; ++i, offset += sizeof( short ) )
                 {
                     saveFile.GetByte( offset + sizeof( char ), sizeof( char ), &value, sizeof( value ) );
-                    cout << "¬O§_®³¨ú¹D¨ã " << ITEM_NAME[ i ] << " ¡H (y/n)";
+                    cout << "æ˜¯å¦æ‹¿å–é“å…· " << ITEM_NAME[ i ] << " ï¼Ÿ (y/n)";
                     cin >> input;
                     if ( 'y' == input )
                     {

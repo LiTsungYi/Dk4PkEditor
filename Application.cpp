@@ -1,4 +1,4 @@
-#include "Pch.h"
+﻿#include "Pch.h"
 
 #include <cassert>
 #include <Kafka\Stream\OutputFileStream.h>
@@ -14,8 +14,8 @@ namespace Dk4
     {
         if ( !OpenFile() )
         {
-            std::string title( "���~!" );
-            std::string message( "�}���ɮץ���" );
+            std::string title( "錯誤!" );
+            std::string message( "開啟檔案失敗" );
 
             tinyfd_messageBox( title.c_str(), message.c_str(), "ok", "error", 0 );
             return 0;
@@ -23,8 +23,8 @@ namespace Dk4
 
         if ( !ValidateFile() )
         {
-            std::string title( "���~!" );
-            std::string message( "�ɮ����ҥ���" );
+            std::string title( "錯誤!" );
+            std::string message( "檔案驗證失敗" );
 
             tinyfd_messageBox( title.c_str(), message.c_str(), "ok", "error", 0 );
             return 0;
@@ -44,13 +44,13 @@ namespace Dk4
         {
             "*.dk4"
         };
-        std::string fileName = tinyfd_openFileDialog( "��ܰO����", "", 1, filters, 0 );
+        std::string fileName = tinyfd_openFileDialog( "選擇記錄檔", "", 1, filters, "", 0 );
         if ( fileName.length() == 0 )
         {
             return false;
         }
 
-        m_stream = std::shared_ptr< Kafka::InputFileStream >( new Kafka::InputFileStream( fileName, true ) );
+        m_stream = std::shared_ptr< Kafka::Stream::InputFileStream >( new Kafka::Stream::InputFileStream( fileName, true ));
         return m_stream && m_stream->CanRead();
     }
 
@@ -64,46 +64,46 @@ namespace Dk4
     void Console::LoadLeader()
     {
         SailorData sailorLeader;
-        m_stream->Seek( SAILOR_LEADER_OFFSET );
+        m_stream->SeekRead( SAILOR_LEADER_OFFSET );
         sailorLeader.ReadFromStream( m_stream );
 
-        std::string title( "�D�����դO" );
+        std::string title( "主角的勢力" );
         m_teamId = sailorLeader.m_Team;
         tinyfd_messageBox( title.c_str(), TEAM_NAME[ m_teamId ].c_str(), "ok", "error", 0 );
     }
 
     void Console::LoadSailors()
     {
-        m_stream->Seek( SAILOR_OFFSET );
+        m_stream->SeekRead( SAILOR_OFFSET );
         for ( int i = 0; i < SAILOR_NUMBER; ++i )
         {
             m_sailorData[ i ].m_SailorId = i;
             m_sailorData[ i ].ReadFromStream( m_stream );
             if ( i <= NON_NPC_SAILOR_NUMBER )
             {
-                // �ˬd�O�_�����դO����
+                // 檢查是否為本勢力海員
                 if ( m_sailorData[ i ].m_Team != m_teamId )
                 {
-                    std::string title2( "�O�_�ܽ�" );
+                    std::string title2( "是否邀請" );
                     tinyfd_messageBox( title2.c_str(), SAILOR_NAME[ i ].c_str(), "ok", "error", 0 );
                 }
                 else
                 {
                     switch ( i )
                     {
-                    case 39: // ��i���D�J�Q�ּw
-                    case 42: // ���wù�D�w�D�ھ|�}��
-                    case 44: // ���w�i�D���������D�ڮL
-                    case 45: // �ڤڬ��F�D�k�����D���p�B
-                    case 52: // ���R�D�Ӯq
-                    case 54: // �}�ںq�D�w�D�J���d�S
-                    case 66: // ���D���C�}
-                    case 72: // ��D������
+                    case 39: // 詹姆茲．克利福德
+                    case 42: // 彼德羅．德．巴魯迪斯
+                    case 44: // 赫德姆．阿弗美朵．巴夏
+                    case 45: // 巴巴洛沙．法斯爾．海雷丁
+                    case 52: // 索靜．來島
+                    case 54: // 迪歐歌．德．埃斯康特
+                    case 66: // 伊文．尼耶迪
+                    case 72: // 芬．布蘭科
                     {
-                        // �ˬd�O�_���դO�w�g���`
+                        // 檢查是否為勢力已經滅亡
                         if ( m_sailorData[ i ].m_Team == TEAM_JOINABLE )
                         {
-                            std::string title2( "�O�_�ܽ�" );
+                            std::string title2( "是否邀請" );
                             tinyfd_messageBox( title2.c_str(), SAILOR_NAME[ i ].c_str(), "ok", "error", 0 );
                         }
                     }
@@ -116,7 +116,7 @@ namespace Dk4
 
     void Console::LoadCities()
     {
-        m_stream->Seek( CITY_OFFSET );
+        m_stream->SeekRead( CITY_OFFSET );
         for ( int i = 0; i < CITY_NUMBER; ++i )
         {
             m_cityData[ i ].m_CityId = i;
@@ -127,7 +127,7 @@ namespace Dk4
     void Console::LoadItems()
     {
         // char myOwnValue = 0x0C;
-        m_stream->Seek( ITEM_OFFSET );
+        m_stream->SeekRead( ITEM_OFFSET );
         for ( int i = 0; i < ITEM_NUMBER; ++i )
         {
             m_itemData[ i ].m_itemId = i;

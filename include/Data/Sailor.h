@@ -1,53 +1,53 @@
-#pragma once
+﻿#pragma once
 
 #include <Kafka\Stream\ISerializable.h>
 
-namespace Kafka
+namespace Kafka::Stream
 {
     struct IOutputStream;
     struct IInputStream;
-} // namespace Kafka
+} // namespace Kafka::Stream
 
 namespace Dk4
 {
     //////////////////////////////////////////////////////////////////////////
-    // ���� 
+    // 海員 
     enum BaseSkill
     {
-        BASE_CON,       // ��O
-        BASE_AGI,       // �ӱ�
-        BASE_CRM,       // �y�O
-        BASE_INT,       // ���O
-        BASE_SPI,       // �믫
-        BASE_LUK,       // �B��
-        BASE_MAX        // �ޯ��
+        BASE_CON,       // 體力
+        BASE_AGI,       // 敏捷
+        BASE_CRM,       // 魅力
+        BASE_INT,       // 智力
+        BASE_SPI,       // 精神
+        BASE_LUK,       // 運氣
+        BASE_MAX        // 技能數
     };
 
     enum Exp
     {
-        EXP_1,          // �ӷ~
-        EXP_2,          // �x��
-        EXP_MAX         // �`��
+        EXP_1,          // 商業
+        EXP_2,          // 軍事
+        EXP_MAX         // 總數
     };
 
     enum Equipment
     {
-        EQUIP_WEAPON,   // �Z��
-        EQUIP_ARMOR,    // ����
-        EQUIP_ITEM_1,   // �D�㢰
-        EQUIP_ITEM_2,   // �D�㢱
-        EQUIP_ITEM_3,   // �D�㢲
-        EQUIP_MAX       // �`��
+        EQUIP_WEAPON,   // 武器
+        EQUIP_ARMOR,    // 防具
+        EQUIP_ITEM_1,   // 道具１
+        EQUIP_ITEM_2,   // 道具２
+        EQUIP_ITEM_3,   // 道具３
+        EQUIP_MAX       // 總數
     };
 
-    class SailorData : public Kafka::ISerializable
+    class SailorData : public Kafka::Stream::ISerializable
     {
     public:
         SailorData();
         ~SailorData();
 
-        virtual void WriteToStream( std::shared_ptr<Kafka::IOutputStream> stream );
-        virtual void ReadFromStream( std::shared_ptr<Kafka::IInputStream> stream );
+        virtual void WriteToStream( std::shared_ptr<Kafka::Stream::IOutputStream> stream );
+        virtual void ReadFromStream( std::shared_ptr<Kafka::Stream::IInputStream> stream );
 
         size_t m_SailorId;
 
