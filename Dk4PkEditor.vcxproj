@@ -114,7 +114,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Kafka\Kafka.vcxproj">
+    <ProjectReference Include="Kafka\Kafka.vcxproj">
       <Project>{fbb2314a-09c7-45d7-bab0-6a2651a39702}</Project>
     </ProjectReference>
     <ProjectReference Include="TinyFileDialogs\TinyFileDialogs.vcxproj">
