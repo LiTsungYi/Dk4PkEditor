@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="TinyFileDialogs">
-      <UniqueIdentifier>{c73aca0d-2029-4717-8936-36038c374a95}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Data">
       <UniqueIdentifier>{6b41b092-5e1d-474e-87b0-7b6b4cbc5135}</UniqueIdentifier>
     </Filter>
@@ -27,9 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Libraries\TinyFileDialogs\tinyfiledialogs.h">
-      <Filter>TinyFileDialogs</Filter>
-    </ClInclude>
     <ClInclude Include="include\DK4_Common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -55,9 +49,6 @@
   <ItemGroup>
     <ClCompile Include="Dk4PkEditor.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Libraries\TinyFileDialogs\tinyfiledialogs.c">
-      <Filter>TinyFileDialogs</Filter>
     </ClCompile>
     <ClCompile Include="src\Data\Sailor.cpp">
       <Filter>Source Files\Data</Filter>

@@ -94,7 +94,6 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Libraries\TinyFileDialogs\tinyfiledialogs.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="include\Data\City.h" />
     <ClInclude Include="include\Data\Item.h" />
@@ -104,10 +103,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Libraries\TinyFileDialogs\tinyfiledialogs.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Dk4PkEditor.cpp" />
     <ClCompile Include="src\Data\City.cpp" />
@@ -121,6 +116,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Kafka\Kafka.vcxproj">
       <Project>{fbb2314a-09c7-45d7-bab0-6a2651a39702}</Project>
+    </ProjectReference>
+    <ProjectReference Include="TinyFileDialogs\TinyFileDialogs.vcxproj">
+      <Project>{2912ccc5-75df-4767-adfb-ab08fe32c389}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
