@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Kafka\Stream\ISerializable.h>
 #include "DK4_Common.h"
@@ -22,7 +22,7 @@ namespace Dk4
 
         size_t          m_itemId;
 
-        char m_owned; // �O�_�֦� �֦�: 0x0C
+        char m_owned; //持有者: 0x0C
     };
 
 } // namespace Dk4

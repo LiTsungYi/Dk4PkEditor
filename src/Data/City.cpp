@@ -1,4 +1,4 @@
-#include "Pch.h"
+﻿#include "Pch.h"
 
 #include <Kafka\Stream\IInputStream.h>
 #include <Kafka\Stream\IOutputStream.h>
@@ -7,7 +7,7 @@
 namespace Dk4
 {
     //////////////////////////////////////////////////////////////////////////
-    // ��f
+    // 城市
     CityData::CityData()
         : m_CityId( 0 )
     {}

@@ -1,4 +1,4 @@
-#include "Pch.h"
+﻿#include "Pch.h"
 
 #include <Kafka\Stream\IInputStream.h>
 #include <Kafka\Stream\IOutputStream.h>

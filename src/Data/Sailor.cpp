@@ -1,4 +1,4 @@
-#include "Pch.h"
+﻿#include "Pch.h"
 
 #include <Kafka\Stream\IInputStream.h>
 #include <Kafka\Stream\IOutputStream.h>
@@ -8,7 +8,7 @@ namespace Dk4
 {
 
     //////////////////////////////////////////////////////////////////////////
-    // ����
+    // 海員
     SailorData::SailorData()
         : m_SailorId( 0 )
         , m_Team( 0 )
