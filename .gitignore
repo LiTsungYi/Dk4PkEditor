@@ -37,3 +37,5 @@
 /ipch
 .vs
 Debug
+TinyFileDialogs/bin
+TinyFileDialogs/obj
